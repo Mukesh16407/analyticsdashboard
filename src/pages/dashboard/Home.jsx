@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
     const dispatch = useDispatch()
    const dashbord = useSelector((state)=> state.dashboard)
-   console.log(dashbord);
+
 
    useEffect(()=>{
     dispatch(getRealTimeInfoHydrator())

@@ -3,11 +3,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { DonutChart } from "./DonutChart";
 import Chart from "react-apexcharts";
 import ApexCharts from "apexcharts";
-
+import { MdLegendToggle } from "react-icons/md";
 
 const Charts = ({revnewArray,saleValueArray,userActivity}) => {
-
-  
 
   const chartRef = useRef(null);
   const [timePeriod, setTimePeriod] = useState("all");
@@ -139,6 +137,15 @@ const getXAxisOptions = () => ({
 
   return decimalFormatter(value);
 };
+
+ const decimalFormatter = (value) =>
+  value
+    ? Number(value)
+        .toFixed(2)
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        .replace("999,999,999.00", "Withdraw All")
+    : "0.00";
+    
 const getYAxisOptions = () => ({
   type: "datetime",
   show: isAdvancedControlsVisible,
@@ -470,6 +477,12 @@ const [options] = useState({
               >
                 All
               </button>
+              <button onClick={toggleAdvancedControls} title="Toggle Legend">
+                    <MdLegendToggle
+                      style={{ fontSize: "1.45rem" }}
+                      
+                    />
+                  </button>
               
             </div>
           </div>
