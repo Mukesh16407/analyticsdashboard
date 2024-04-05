@@ -4,6 +4,7 @@ import { Home } from './pages/dashboard/Home'
 import { Header } from './component/Header'
 import { Sidebar } from './component/Sidebar'
 import { useState } from 'react'
+import Charts from './widgets/charts/Charts'
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
@@ -14,13 +15,13 @@ function App() {
  
 
   return (
-    <div className='grid-container'>
+    <div className='grid-container' >
      <Header OpenSidebar={OpenSidebar}/>
       <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
+      
       <Routes>
        <Route path="/" element={<Home />} />
       
-    
     </Routes>
     </div>
    

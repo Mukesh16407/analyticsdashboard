@@ -15,12 +15,12 @@ export const Sidebar =({ openSidebarToggle, OpenSidebar })=> {
       className={openSidebarToggle ? "sidebar-responsive" : ""}
     >
       <div className="sidebar-title">
-        <div className="sidebar-brand">
+        {/* <div className="sidebar-brand">
           <BsGrid1X2Fill className="icon_header" /> Dashboard
         </div>
         <span className="icon close_icon" onClick={OpenSidebar}>
           X
-        </span>
+        </span> */}
       </div>
 
       <ul className="sidebar-list">
