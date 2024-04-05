@@ -1,9 +1,21 @@
+/* eslint-disable react/prop-types */
 // DonutChart.js
 import ReactApexChart from 'react-apexcharts';
 
-export const DonutChart = () => {
-  const data = [30, 50, 20,]; 
-  const labels = ['curent, pending, block']; 
+export const DonutChart = ({userActivity}) => {
+
+  const { active, inactive, pending } = userActivity;
+  const totalUsers = active + inactive + pending;
+
+   // Calculate percentages
+   const activePercentage = (active / totalUsers) * 100;
+   const inactivePercentage = (inactive / totalUsers) * 100;
+   const pendingPercentage = (pending / totalUsers) * 100;
+
+  
+
+  const data = [activePercentage,inactivePercentage,pendingPercentage]; 
+  const labels = ['Active, pending, Inactive']; 
 
   const series = data;
   const options = {
@@ -16,20 +28,20 @@ export const DonutChart = () => {
     plotOptions: {
       pie: {
         donut: {
-          size: '70%' // Adjust the size of the donut hole
+          size: '70%' 
         }
       }
     },
     tooltip: {
-      theme: 'dark', // Tooltip theme
+      theme: 'dark', 
       y: {
         formatter: function (val) {
-          return val + '%'; // Format tooltip value as percentage
+          return val + '%'; 
         }
       }
     },
     legend: {
-      position: 'bottom' // Position of the legend
+      position: 'bottom' 
     }
   };
 

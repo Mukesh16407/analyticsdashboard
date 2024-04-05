@@ -1,6 +1,10 @@
+/* eslint-disable react/prop-types */
+import { useRef } from "react";
 import { DonutChart } from "./DonutChart";
 
-const Charts = () => {
+const Charts = ({revnewArray,saleValueArray,userActivity}) => {
+
+  const chartRef = useRef(null);
   return (
     <div>
         <div
@@ -105,11 +109,11 @@ const Charts = () => {
       <div
         style={{
           width: "50%",
-          display: "flex",
+          marginTop: "60px",
           minHeight: "50vh",
         }}
       >
-        <DonutChart/>
+        <DonutChart userActivity={userActivity}/>
       </div>
     </div>
     </div>

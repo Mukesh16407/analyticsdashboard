@@ -5,6 +5,7 @@ import { SET_DATA_INFO } from "./ActionType";
 // process.env.REACT_APP_API}/user/cart
 
 export const getRealTimeInfoHydrator = () => (dispatch) => {  
+  
     dispatch(startFetching());
     const url = 'https://analyticsdashboard-data.onrender.com/analyticData'
     axios
@@ -13,7 +14,7 @@ export const getRealTimeInfoHydrator = () => (dispatch) => {
         
         dispatch({
           type: SET_DATA_INFO,
-          payload: data.data
+          payload: data
         });
   
         dispatch(fetchSuccessful());

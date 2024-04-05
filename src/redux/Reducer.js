@@ -14,9 +14,11 @@ const initState = {
     pending: 0,
     inactive: 0
   },
-  dateValueArray: []
+  saleValueArray:[],
+  revnewArray:[]
 };
 const calculateAggregates = (data) => {
+ 
   let totalSales = 0;
   let totalRevenue = 0;
   let userActivity = {
@@ -24,7 +26,8 @@ const calculateAggregates = (data) => {
     pending: 0,
     inactive: 0
   };
-  let dateValueArray = [];
+  let saleValueArray = [];
+  let revnewArray =[];
 
   if (data && Array.isArray(data)) {
     data.forEach(item => {
@@ -42,14 +45,16 @@ const calculateAggregates = (data) => {
         userActivity.inactive += activityCount || 0;
       }
 
-      dateValueArray.push({ date: item.date, value: item.sales || 0 });
+      saleValueArray.push({ date: item.date, value: item.sales || 0 });
+      revnewArray.push({date: item.date, value: Math.floor(item.revenue/100) || 0})
     });
   }
   return {
     totalSales,
     totalRevenue,
     userActivity,
-    dateValueArray
+    saleValueArray,
+    revnewArray
   };
 }
 
@@ -59,18 +64,21 @@ const calculateAggregates = (data) => {
       return {
         ...state,
         isFetchingData: true,
+        isLoading:true,
         isFetchedError: false,
       };
     case FETCH_END:
       return {
         ...state,
         isFetchingData: false,
+        isLoading:false,
         isFetchedError: false,
       };
 
       case SET_DATA_INFO:
         const { payload } = action;
-        const { totalSales, totalRevenue, userActivity, dateValueArray } = calculateAggregates(payload);
+    
+        const { totalSales, totalRevenue, userActivity, saleValueArray, revnewArray} = calculateAggregates(payload);
   
         return {
           ...state,
@@ -78,7 +86,8 @@ const calculateAggregates = (data) => {
           totalSales,
           totalRevenue,
           userActivity,
-          dateValueArray
+          saleValueArray,
+          revnewArray
         };
       case FETCH_ERROR:
         return {
