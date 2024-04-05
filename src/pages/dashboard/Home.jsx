@@ -85,7 +85,7 @@ import { useDispatch, useSelector } from 'react-redux'
           <h3>ALERTS</h3>
           <BsFillBellFill className="card_icon" />
         </div>
-        {/* <h1>{dashbord?.userActivity?.pending}</h1> */}
+      
         <CountUp start={0} end={dashbord?.userActivity?.pending}>
                 {({ countUpRef, start }) => (
                   <VisibilitySensor onChange={start}>
