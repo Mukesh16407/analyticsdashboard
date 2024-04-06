@@ -99,8 +99,8 @@ import { useDispatch, useSelector } from 'react-redux'
     </div>
     <Charts revnewArray={dashbord?.revnewArray} saleValueArray ={dashbord?.saleValueArray} userActivity={dashbord?.userActivity}/>
     <div className="charts">
-       <BarChart/>
-       <AreaChart/>
+       <BarChart revnewArray={dashbord?.revnewArray} saleValueArray ={dashbord?.saleValueArray}/>
+       <AreaChart revnewArray={dashbord?.revnewArray} saleValueArray ={dashbord?.saleValueArray}/>
     </div>
     
 

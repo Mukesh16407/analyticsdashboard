@@ -420,7 +420,7 @@ const [options] = useState({
               gap: "10px",
             }}
           >
-            <div style={{color:'wheat'}}>Revnew Vs Sell</div>
+            <div style={{color:'wheat'}}>Sell  Vs Revnew </div>
             
           </div>
           <div

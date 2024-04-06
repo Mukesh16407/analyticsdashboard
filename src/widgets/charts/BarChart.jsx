@@ -1,15 +1,37 @@
+/* eslint-disable react/prop-types */
 import ReactApexChart from 'react-apexcharts';
 
-export const BarChart = () => {
+export const BarChart = ({revnewArray,saleValueArray}) => {
+
+  
+
+  const calculateMonthlyTotal = (dataArray) => {
+    const monthlyTotals = new Array(12).fill(0); // Initialize array with 12 zeroes for each month
+    
+    // Loop through each data entry and accumulate values by month
+    dataArray.forEach(entry => {
+      const parts = entry.date.split('/');
+      const month = parseInt(parts[0], 10) - 1; // Month index (0-based)
+      const value = entry.value;
+      monthlyTotals[month] += value; // Add value to corresponding month
+    });
+
+    return monthlyTotals;
+  };
+
+  const monthlyRevenue = calculateMonthlyTotal(revnewArray);
+  const monthlySales = calculateMonthlyTotal(saleValueArray);
+
+  
 
     const series = [
         {
-          name: 'Sales',
-          data: [30, 40, 45, 50, 49, 60, 70, 91, 125]
+          name: 'Revenue',
+          data: monthlyRevenue
         },
         {
-          name: 'Profit',
-          data: [20, 25, 30, 35, 40, 45, 50, 55, 60]
+          name: 'Sales',
+          data: monthlySales
         }
       ];
   
@@ -17,36 +39,33 @@ export const BarChart = () => {
         chart: {
           type: 'bar',
           height: 350,
-          
         },
         plotOptions: {
           bar: {
             horizontal: false,
             columnWidth: '80%',
-            endingShape: 'flat'
+            endingShape: 'flat',
+            dataLabels: {
+              enabled: false // Disable data labels on bars
+            }
           },
-         
         },
-      
         stroke: {
           width: 2,
           colors: ['transparent']
         },
         title: {
-          text: 'Sales and Profit Comparison',
+          text: 'Monthly Sales and Revenue Comparison (2023)',
           align: 'center',
           style: {
             fontSize: '18px'
           }
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         },
         yaxis: {
-          title: {
-            text: 'Amount (in $)'
-          },
-  
+          show: false, // Hide y-axis labels
         },
         grid: {
           show: false 
@@ -54,10 +73,9 @@ export const BarChart = () => {
         tooltip: {
           y: {
             formatter: function (val) {
-              return "$ " + val + " thousands";
+              return "$ " + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format tooltip value
             }
           },
-          
         },
         fill: {
           opacity: 1
@@ -65,7 +83,6 @@ export const BarChart = () => {
         legend: {
           position: 'top'
         },
-       
       };
 
   return (
