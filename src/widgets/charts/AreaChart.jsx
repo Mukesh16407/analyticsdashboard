@@ -1,13 +1,30 @@
+/* eslint-disable react/prop-types */
 import ReactApexChart from "react-apexcharts";
 
-export const AreaChart = () => {
+export const AreaChart = ({revnewArray,saleValueArray}) => {
 
-    const salesData = [30, 40, 45, 50, 49, 60, 70, 91, 125];
-    const profitData = [20, 25, 30, 35, 40, 45, 50, 55, 60];
+  const filterDataForMarch2024 = (dataArray) => {
+    const filteredData = dataArray.filter(entry => {
+      const [month, day, year] = entry.date.split('/').map(part => parseInt(part, 10));
+      return month === 3 && year === 2024;
+    });
+  
+
+    const salesValues = filteredData.map(entry => entry.value);
+  
+    return salesValues;
+  };
+
+  // Get sales data for March 2024
+  const salesDataMarch2024 = filterDataForMarch2024(saleValueArray);
+  const monthLabel = 'March 2024';
+  console.log(salesDataMarch2024,"salesDataMarch2024")
+
+
 
     const series = [
-        { name: 'Sales', type: 'area', data: salesData },
-        { name: 'Profit', type: 'area', data: profitData }
+        { name: 'Sales', type: 'area', data: salesDataMarch2024 },
+      
       ];
       const options = {
         chart: {
@@ -24,7 +41,7 @@ export const AreaChart = () => {
           curve: 'smooth'
         },
         xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: [monthLabel],
           labels: {
             style: {
               colors: '#ffffff' 
@@ -70,7 +87,14 @@ export const AreaChart = () => {
         },
         grid: {
           show: false 
-        }
+        },
+        title: {
+          text: 'March Sales(2024)',
+          align: 'center',
+          style: {
+            fontSize: '18px'
+          }
+        },
       };
   return (
     <div>

@@ -65,7 +65,7 @@ export const BarChart = ({revnewArray,saleValueArray}) => {
           categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         },
         yaxis: {
-          show: false, // Hide y-axis labels
+          show: false,
         },
         grid: {
           show: false 
@@ -73,7 +73,7 @@ export const BarChart = ({revnewArray,saleValueArray}) => {
         tooltip: {
           y: {
             formatter: function (val) {
-              return "$ " + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format tooltip value
+              return "$ " + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); 
             }
           },
         },
