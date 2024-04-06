@@ -420,14 +420,13 @@ const [options] = useState({
               gap: "10px",
             }}
           >
-            <div>Documentation</div>
-            <div>Test</div>
+            <div style={{color:'wheat'}}>Revnew Vs Sell</div>
+            
           </div>
           <div
             style={{
               width: "100%",
               maxWidth: "460px",
-              border: "1px solid gray",
               minHeight: "300px",
               padding: "15px",
               borderRadius: "10px",
@@ -439,6 +438,9 @@ const [options] = useState({
             <div style={{ display: "flex", marginTop: "10px", gap: "15px" }}>
              
               <button
+                className={`${
+                  timePeriod === "1_month" ? "chart-active-tab" : ""
+                }`}
              
                 style={{
                   fontSize: "12px",
@@ -458,7 +460,10 @@ const [options] = useState({
                   background: "#31bf31",
                   borderRadius: "5px",
                 }}
-                onClick={() => filterBy3Months("1_month")}
+                className={`${
+                  timePeriod === "3_month" ? "chart-active-tab" : ""
+                }`}
+                onClick={() => filterBy3Months("3_month")}
               >
                 3M
               </button>
@@ -469,7 +474,10 @@ const [options] = useState({
                   background: "#31bf31",
                   borderRadius: "5px",
                 }}
-                onClick={() => filterByYear("1_month")}
+                className={`${
+                  timePeriod === "1_year" ? "chart-active-tab" : ""
+                }`}
+                onClick={() => filterByYear("1_year")}
               >
                 1Y
               </button>
@@ -480,7 +488,10 @@ const [options] = useState({
                   background: "#31bf31",
                   borderRadius: "5px",
                 }}
-                onClick={() => resetFilter("1_month")}
+                className={`${
+                  timePeriod === "all" ? "chart-active-tab" : ""
+                }`}
+                onClick={() => resetFilter("all")}
               >
                 All
               </button>
@@ -489,7 +500,7 @@ const [options] = useState({
                       style={{ fontSize: "1.45rem" }}
                       
                     />
-                  </button>
+              </button>
               
             </div>
           </div>

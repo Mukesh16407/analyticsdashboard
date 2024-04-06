@@ -218,6 +218,11 @@ body {
   height: 300px;
 }
 
+.chart-active-tab {
+  color: #171f32 !important;
+  background: #f59c1a !important;
+}
+
 /* End Main  */
 
 /* Medium <= 992px */
