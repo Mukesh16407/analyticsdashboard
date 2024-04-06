@@ -39,7 +39,7 @@ const Charts = ({revnewArray,saleValueArray,userActivity}) => {
     copiedData.sort((a, b) => a.date - b.date);
   
     // Optionally, remove the 'date' property from the final sorted array
-    return copiedData.map(item => ({ date: item.dateFormatted, value: item.value }));
+    return copiedData.map(item => ({ x: item.dateFormatted, y: item.value }));
   };
   
   const sortedRevnewData = useMemo(() => convertAndSortByDate(revnewArray), [revnewArray]);
@@ -52,7 +52,7 @@ const filterByDate = useMemo(
     const startDateTimestamp = startDat.getTime();
     const endDateTimestamp = endDat.getTime();
     return data.filter((item) => {
-      const itemTimestamp = new Date(item.date).getTime();
+      const itemTimestamp = new Date(item.x).getTime();
       return itemTimestamp >= startDateTimestamp && itemTimestamp <= endDateTimestamp;
     });
   },
@@ -75,10 +75,16 @@ useEffect(() => {
 const filterByMonth = (period) => {
   setTimePeriod(period);
   const today = new Date();
-  const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
 
-  setStartDate(lastYear);
-  setEndDate(today);
+  
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  const startDate = new Date(lastMonth.getFullYear(), lastMonth.getMonth(), lastMonth.getDate());
+
+  
+  setStartDate(startDate);
+  setEndDate(endDate);
 };
 const filterBy3Months = (period) => {
   setTimePeriod(period);
@@ -381,6 +387,7 @@ const [options] = useState({
     filteredRevenewData,
     filteredSellData
   ]);
+
   
   return (
     <div>
